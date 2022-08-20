@@ -10,7 +10,7 @@ function A(x, y) {
         : A(x - 1, A(x, y - 1));
 }
 const data = new SlashCommandBuilder()
-  .setName('Ackermann')
+  .setName('ackermann')
   .setDescription('Finds a number given two numbers!')
   .addStringOption(option =>
     option.setName('number1')
