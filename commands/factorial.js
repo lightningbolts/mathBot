@@ -27,7 +27,7 @@ module.exports = {
   //   },
   data,
   async execute(interaction) {
-    const result = factorial(interaction.options.getString("factorial")).toString()
+    const result = factorial(interaction.options.getString("number")).toString()
     await interaction.reply(result)
   }
 };

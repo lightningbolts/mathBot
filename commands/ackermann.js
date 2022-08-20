@@ -1,25 +1,23 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { execute } = require("./ping");
-
-
-function fibonacci(num) {
-  var a = 1, b = 0, temp;
-
-  while (num >= 0) {
-    temp = a;
-    a = a + b;
-    b = temp;
-    num--;
-  }
-
-  return b;
+function A(x, y) {
+  return y === 0
+    ? 0
+    : x === 0
+      ? 2 * y
+      : y === 1
+        ? 2
+        : A(x - 1, A(x, y - 1));
 }
-
 const data = new SlashCommandBuilder()
-  .setName('fibonacci')
-  .setDescription('Finds a fibonacci number!')
+  .setName('Ackermann')
+  .setDescription('Finds a number given two numbers!')
   .addStringOption(option =>
-    option.setName('number')
+    option.setName('number1')
+      .setDescription('type in a number')
+      .setRequired(true))
+  .addStringOption(option =>
+    option.setName('number2')
       .setDescription('type in a number')
       .setRequired(true));
 
@@ -32,7 +30,7 @@ module.exports = {
   //   },
   data,
   async execute(interaction) {
-    const result = fibonacci(interaction.options.getString("number")).toString()
+    const result = A(interaction.options.getString("number1"), interaction.options.getString("number2")).toString()
     await interaction.reply(result)
   }
 };
