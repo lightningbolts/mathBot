@@ -19,12 +19,6 @@ const data = new SlashCommandBuilder()
       .setRequired(true));
 
 module.exports = {
-  //   data: new SlashCommandBuilder()
-  //     .setName('derivative')
-  //     .setDescription('Gets the derivative of a function!'),
-  //   async execute(interaction) {
-  //     await interaction.reply('Pong!');
-  //   },
   data,
   async execute(interaction) {
     const result = factorial(interaction.options.getString("number")).toString()

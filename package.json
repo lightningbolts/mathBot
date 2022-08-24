@@ -8,8 +8,12 @@
   },
   "dependencies": {
     "@discordjs/rest": "^1.0.1",
+    "axios": "^0.27.2",
     "discord.js": "^14.1.2",
-    "mathjs": "^11.0.1"
+    "got": "^12.3.1",
+    "http": "^0.0.1-security",
+    "mathjs": "^11.0.1",
+    "request": "^2.88.2"
   },
   "author": "timberlake2025",
   "license": "ISC"
