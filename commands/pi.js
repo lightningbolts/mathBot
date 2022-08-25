@@ -17,28 +17,4 @@ module.exports = {
     const { data } = await axios.get(`http://127.0.0.1:5000/get-pi/${n}`)
     await interaction.reply(data.pi)
   }
-  // async execute(interaction) {
-  //   try {
-  //     const result = await axios.get("http://127.0.0.1:5000/get-pi/1000")
-  //     const arr = Object.values(result)
-  //     console.log(arr[0])
-  //     await interaction.reply(arr)
-  //   } catch (err) {
-  //     console.error(err)
-  //   }
-  // }
 };
-
-// axios.get('http://127.0.0.1:5000/get-pi/1000')
-//   .then(res => {
-//     const headerDate = res.headers && res.headers.date ? res.headers.date : 'no response date';
-//     console.log('Status Code:', res.status);
-//     console.log('Date in Response header:', headerDate);
-
-//     const result = res.data;
-//     const arr = Object.values(result)
-//     console.log(arr[0])
-//   })
-//   .catch(err => {
-//     console.log('Error: ', err.message);
-//   });

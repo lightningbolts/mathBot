@@ -1,14 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { execute } = require("./ping");
-
-
-function factorial(n) {
-  if (n <= 1) {
-    return n
-  } else {
-    return n * factorial(n - 1)
-  }
-}
+const axios = require('axios');
 
 const data = new SlashCommandBuilder()
   .setName('factorial')
@@ -21,7 +13,8 @@ const data = new SlashCommandBuilder()
 module.exports = {
   data,
   async execute(interaction) {
-    const result = factorial(interaction.options.getString("number")).toString()
-    await interaction.reply(result)
+    const n = interaction.options.getString("number")
+    const { data } = await axios.get(`http://127.0.0.1:5000/get-factorial/${n}`)
+    await interaction.reply(data.factorial)
   }
 };
