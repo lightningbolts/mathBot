@@ -4,6 +4,7 @@ const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 const blockedUsers = [];
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
@@ -22,7 +23,12 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
   if (!interaction.isChatInputCommand()) return;
   if (blockedUsers.includes(interaction.user.id)) {
-    await interaction.reply("You cannot use this bot.")
+    const embed = new EmbedBuilder()
+      .setColor(0xff0000)
+      .setTitle("Error!")
+      .setDescription("You cannot use this bot.")
+      .setFooter({ text: error.toString() })
+    await interaction.reply({ ephemeral: true, embeds: [embed] })
     return
   };
   const command = client.commands.get(interaction.commandName);
@@ -33,7 +39,12 @@ client.on('interactionCreate', async interaction => {
     await command.execute(interaction);
   } catch (error) {
     console.error(error);
-    await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+    const embed = new EmbedBuilder()
+      .setColor(0xff0000)
+      .setTitle(`Error!`)
+      .setDescription("There was an error while executing this command.")
+      .setFooter({ text: error.toString() })
+    await interaction.reply({ ephemeral: false, embeds: [embed] })
   }
 });
 
