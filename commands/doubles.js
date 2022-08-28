@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { execute } = require("./ping");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
   .setName('doubles')
@@ -196,12 +197,22 @@ module.exports = {
       const result = game(interaction.options.getString("number"))
       const values = Object.values(result)
       console.log(values, result)
-      await interaction.reply("h1w: " + values[0].toString() + "\n"
-        + "h2w: " + values[1].toString() + "\n"
-        + "tie: " + values[2].toString() + "\n" +
-        "average amount of steps: " + values[3].toString() + "\n" +
-        "min amount of steps: " + values[4].toString() + "\n" +
-        "max amount of steps: " + values[5].toString())
+      const embed = new EmbedBuilder()
+        .setColor(0x0099FF)
+        .setTitle(`Playing doubles ${interaction.options.getString("number")} times!`)
+        .setDescription("h1w: " + values[0].toString() + "\n"
+          + "h2w: " + values[1].toString() + "\n"
+          + "tie: " + values[2].toString() + "\n" +
+          "average amount of steps: " + values[3].toString() + "\n" +
+          "min amount of steps: " + values[4].toString() + "\n" +
+          "max amount of steps: " + values[5].toString())
+      await interaction.reply({ ephemeral: false, embeds: [embed] })
+      // await interaction.reply("h1w: " + values[0].toString() + "\n"
+      //   + "h2w: " + values[1].toString() + "\n"
+      //   + "tie: " + values[2].toString() + "\n" +
+      //   "average amount of steps: " + values[3].toString() + "\n" +
+      //   "min amount of steps: " + values[4].toString() + "\n" +
+      //   "max amount of steps: " + values[5].toString())
     }
   }
 };

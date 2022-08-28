@@ -1,0 +1,28 @@
+const { SlashCommandBuilder } = require('discord.js');
+const { execute } = require("./ping");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+
+const data = new SlashCommandBuilder()
+  .setName('test-button')
+  .setDescription('Returns a button!')
+  .addStringOption(option =>
+    option.setName('title')
+      .setDescription('type words here')
+      .setRequired(true));
+
+module.exports = {
+  data,
+  async execute(interaction) {
+    const result = interaction.options.getString("title")
+
+    const row = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('primary')
+          .setLabel(result)
+          .setStyle(ButtonStyle.Primary),
+      );
+
+    await interaction.reply({ content: 'Button', ephemeral: false, components: [row] })
+  }
+};

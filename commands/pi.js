@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { execute } = require("./ping");
+const wait = require('node:timers/promises').setTimeout;
 const axios = require('axios');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
   .setName('pi')
@@ -14,7 +16,21 @@ module.exports = {
   data,
   async execute(interaction) {
     const n = interaction.options.getString("number")
+    if (n > 3500) {
+      const embed = new EmbedBuilder()
+        .setColor(0xff0000)
+        .setTitle(`Error!`)
+        .setDescription("Input is too large.")
+      await interaction.reply({ ephemeral: false, embeds: [embed] })
+      return
+    }
     const { data } = await axios.get(`http://127.0.0.1:5000/get-pi/${n}`)
-    await interaction.reply(data.pi)
+    const embed = new EmbedBuilder()
+      .setColor(0x0099FF)
+      .setTitle(`The ${n} digits of pi`)
+      .setDescription(data.pi)
+    await interaction.deferReply();
+    await wait(2000);
+    await interaction.editReply({ ephemeral: false, embeds: [embed] })
   }
 };

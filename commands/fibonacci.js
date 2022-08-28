@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { execute } = require("./ping");
 const axios = require('axios');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
   .setName('fibonacci')
@@ -15,6 +16,10 @@ module.exports = {
   async execute(interaction) {
     const n = interaction.options.getString("number")
     const { data } = await axios.get(`http://127.0.0.1:5000/get-fib/${n}`)
-    await interaction.reply(data.fib)
+    const embed = new EmbedBuilder()
+      .setColor(0x0099FF)
+      .setTitle(`The ${n}th fibonacci number`)
+      .setDescription(data.fib)
+    await interaction.reply({ ephemeral: false, embeds: [embed] })
   }
 };

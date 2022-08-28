@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { execute } = require("./ping");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 
 
 function gcd(a, b) {
@@ -26,6 +27,10 @@ module.exports = {
   data,
   async execute(interaction) {
     const result = gcd(interaction.options.getString("number1"), interaction.options.getString("number2")).toString()
-    await interaction.reply(result)
+    const embed = new EmbedBuilder()
+      .setColor(0x0099FF)
+      .setTitle(`The greatest common divisor for ${interaction.options.getString("number1")} and ${interaction.options.getString("number2")}`)
+      .setDescription(result)
+    await interaction.reply({ ephemeral: false, embeds: [embed] })
   }
 };

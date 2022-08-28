@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { execute } = require("./ping");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 
 const data = new SlashCommandBuilder()
   .setName('pig-latin')
@@ -28,6 +29,10 @@ module.exports = {
   data,
   async execute(interaction) {
     const result = translatePigLatin(interaction.options.getString("expr"))
-    await interaction.reply(result)
+    const embed = new EmbedBuilder()
+      .setColor(0x0099FF)
+      .setTitle(`Pig Latin expression for ${interaction.options.getString("expr")}`)
+      .setDescription(result)
+    await interaction.reply({ ephemeral: false, embeds: [embed] })
   }
 };

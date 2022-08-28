@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { execute } = require("./ping");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+
 
 const data = new SlashCommandBuilder()
   .setName('caesar-cipher')
@@ -55,6 +57,10 @@ module.exports = {
   data,
   async execute(interaction) {
     const result = caesarShift(interaction.options.getString("expr"), interaction.options.getString("number"))
-    await interaction.reply(result)
+    const embed = new EmbedBuilder()
+      .setColor(0x0099FF)
+      .setTitle(`Caesar shift ${interaction.options.getString("number")} for ${interaction.options.getString("expr")}`)
+      .setDescription(result)
+    await interaction.reply({ ephemeral: false, embeds: [embed] })
   }
 };

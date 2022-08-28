@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { execute } = require("./ping");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+
 const axios = require("axios")
 function A(x, y) {
   return y === 0
@@ -30,6 +32,10 @@ module.exports = {
     const n = interaction.options.getString("number1")
     const m = interaction.options.getString("number2")
     const { data } = await axios.get(`http://127.0.0.1:5000/get-ackermann/${n}/${m}`)
-    await interaction.reply(data.A)
+    const embed = new EmbedBuilder()
+      .setColor(0x0099FF)
+      .setTitle(`Ackermann(${n}, ${m})`)
+      .setDescription(data.A)
+    await interaction.reply({ ephemeral: false, embeds: [embed] })
   }
 };
