@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
-const blockedUsers = [];
+const blockedUsers = [""];
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 
@@ -23,11 +23,11 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
   if (!interaction.isChatInputCommand()) return;
   if (blockedUsers.includes(interaction.user.id)) {
+    console.log("true")
     const embed = new EmbedBuilder()
       .setColor(0xff0000)
       .setTitle("Error!")
       .setDescription("You cannot use this bot.")
-      .setFooter({ text: error.toString() })
     await interaction.reply({ ephemeral: true, embeds: [embed] })
     return
   };

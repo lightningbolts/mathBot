@@ -8,13 +8,18 @@
   },
   "dependencies": {
     "@discordjs/rest": "^1.0.1",
+    "@types/jest": "^28.1.8",
+    "@types/node": "^18.7.13",
     "axios": "^0.27.2",
     "discord.js": "^14.1.2",
     "got": "^12.3.1",
     "http": "^0.0.1-security",
+    "jest": "^29.0.1",
     "latex": "^0.0.1",
     "mathjs": "^11.0.1",
-    "request": "^2.88.2"
+    "nodemon": "^2.0.19",
+    "request": "^2.88.2",
+    "rimraf": "^3.0.2"
   },
   "author": "timberlake2025",
   "license": "ISC"
