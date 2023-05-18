@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { random_color } = require("../helpfulFunctions")
+const wait = require('node:timers/promises').setTimeout;
 
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 
@@ -207,13 +208,10 @@ module.exports = {
           "average amount of steps: " + values[3].toString() + "\n" +
           "min amount of steps: " + values[4].toString() + "\n" +
           "max amount of steps: " + values[5].toString())
-      await interaction.reply({ ephemeral: false, embeds: [embed] })
-      // await interaction.reply("h1w: " + values[0].toString() + "\n"
-      //   + "h2w: " + values[1].toString() + "\n"
-      //   + "tie: " + values[2].toString() + "\n" +
-      //   "average amount of steps: " + values[3].toString() + "\n" +
-      //   "min amount of steps: " + values[4].toString() + "\n" +
-      //   "max amount of steps: " + values[5].toString())
+      //await interaction.reply({ ephemeral: false, embeds: [embed] })
+      await interaction.deferReply();
+      await wait(3000);
+      await interaction.editReply({ ephemeral: false, embeds: [embed] })
     }
   }
 };
