@@ -55,7 +55,7 @@ module.exports = {
         //const deferAmount = parseInt(interaction.options.getString("number2"))
         await interaction.deferReply();
         const result = moneyFlipDisplay(interaction.options.getString("number1"), 0, interaction.options.getString("number2"))
-        await wait(3000);
+        await wait(1000);
         const values = Object.values(result)
         console.log(result)
         const embed = new EmbedBuilder()
