@@ -28,7 +28,7 @@ function moneyFlipDisplay(amount, times, iterations) {
         if (result > max) {
             max = result
         }
-        console.log(result, avg, sum, max)
+        console.log(count, result, avg, sum, max)
     }
     return {
         Avg: avg,
@@ -58,7 +58,6 @@ module.exports = {
         await wait(3000);
         const values = Object.values(result)
         console.log(result)
-        console.log(deferAmount)
         const embed = new EmbedBuilder()
             .setColor(random_color())
             .setTitle(`Amount for ${interaction.options.getString("number1")} ${interaction.options.getString("number2")} times`)
