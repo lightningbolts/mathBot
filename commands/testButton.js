@@ -24,7 +24,7 @@ module.exports = {
           .setStyle(ButtonStyle.Primary),
       );
 
-    await interaction.reply({ content: 'Button', ephemeral: false, components: [row] })
+    await interaction.reply("Yes")
     try {
 
     } catch {
