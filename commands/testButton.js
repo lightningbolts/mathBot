@@ -25,5 +25,14 @@ module.exports = {
       );
 
     await interaction.reply({ content: 'Button', ephemeral: false, components: [row] })
+    try {
+
+    } catch {
+      const embed = new EmbedBuilder()
+        .setColor(random_color())
+        .setTitle("Error!")
+      await interaction.reply({ content: 'Error!', ephemeral: false, embeds: [embed] })
+    }
+
   }
 };
